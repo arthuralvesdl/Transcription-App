@@ -11,10 +11,21 @@ struct ContentView: View {
             Text("Texto:")
                 .font(.headline)
             
-            Text(recognizer.recognizedText)
-                .padding()
-                .frame(maxWidth: .infinity)
-                .cornerRadius(12)
+            if recognizer.recognizerIsRunning {
+                ProgressView()
+            }
+            else if !recognizer.recognizedText.isEmpty && !recognizer.recognizerIsRunning {
+                Text(recognizer.recognizedText)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .cornerRadius(12)
+            } else if recognizer.errorMessage != nil && !recognizer.recognizerIsRunning{
+                Text(recognizer.errorMessage!)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .cornerRadius(12)
+                    .foregroundColor(.red)
+            }
             
             Button(recognizer.recognizerIsRunning ? "Parar" : "Gravar áudio") {
                 recognizer.start()

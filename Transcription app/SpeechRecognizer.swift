@@ -10,6 +10,7 @@ class SpeechRecognizer: ObservableObject {
     @Published var recognizedText: String = ""
     @Published var recognizerIsRunning = false
     @Published var volumeLevel: Float = 0.0
+    @Published var errorMessage: String?
 
     func start() {
         SFSpeechRecognizer.requestAuthorization { authStatus in
@@ -31,6 +32,8 @@ class SpeechRecognizer: ObservableObject {
         if audioEngine.isRunning {
             stop()
         }
+        recognizedText = ""
+        errorMessage = ""
         recognizerIsRunning = true
         
         recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
@@ -53,7 +56,7 @@ class SpeechRecognizer: ObservableObject {
                 self.stop()
             }
             if let error = error {
-                print("Erro: \(error.localizedDescription)")
+                self.errorMessage = error.localizedDescription
                 self.stop()
             }
         }
