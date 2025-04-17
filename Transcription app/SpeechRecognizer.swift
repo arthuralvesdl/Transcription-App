@@ -16,7 +16,7 @@ class SpeechRecognizer: ObservableObject {
         SFSpeechRecognizer.requestAuthorization { authStatus in
             DispatchQueue.main.async {
                 guard authStatus == .authorized else {
-                    print("Permissão negada")
+                    self.errorMessage = "Permissão negada"
                     return
                 }
                 if self.recognizerIsRunning {
