@@ -2,7 +2,7 @@ import Speech
 import AVFoundation
 
 class SpeechRecognizer: ObservableObject {
-    private let recognizer = SFSpeechRecognizer(locale: Locale(identifier: "pt-BR"))
+    private let recognizer = SFSpeechRecognizer(locale:Locale(identifier:  Locale.preferredLanguages.first ?? Locale.current.identifier) )
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     private var recognitionTask: SFSpeechRecognitionTask?
     private let audioEngine = AVAudioEngine()
