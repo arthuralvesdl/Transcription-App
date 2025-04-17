@@ -3,9 +3,7 @@ import Speech
 
 struct ContentView: View {
     @StateObject private var recognizer = SpeechRecognizer()
-    
-    let ia = TextSummarizer()
-    
+
     var body: some View {
         VStack(spacing: 20) {
             Text("Texto:")
